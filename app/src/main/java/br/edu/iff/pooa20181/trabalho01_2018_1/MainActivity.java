@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tMensagem.setText("Quantiade de latas: " + lata +"\nPreço: " + vLata );
                 tMensagem2.setText("Quantiade de galões: " + galao +"\nPreço: " + vGalao );
-                tMensagem3.setText("Melhor resultado: " + "\nQuantidade lata: " + mrLata +" Melhor preco: " +mvLata +
-                        "\nQuantidade galao: "+ mrGalao  + " Melhor preco: " +mvGalao);
+                tMensagem3.setText("Melhor resultado: " + "\nQuantidade melhor lata: " + mrLata +" Melhor preco: " +mvLata +
+                        "\nQuantidade melhor galões: "+ mrGalao  + " Melhor preco: " +mvGalao);
 
             }
         });
@@ -62,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calcular() {
+
+        mrLata = 0;
+        mrGalao = 0;
+        mvLata = 0;
+        mvGalao = 0;
+        lata = 0;
+        galao = 0;
+        vGalao = 0;
+        vLata = 0;
+        litros = 0;
+        resto = 0;
 
 
         metros = Float.parseFloat(edtTamanho.getText().toString());
@@ -71,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
         galao = (int) (litros / 3.6);
 
 
-
-
+//Numero 2
 
         if((litros % 18) !=  0)
         {
@@ -80,16 +90,17 @@ public class MainActivity extends AppCompatActivity {
         }
         vLata =  lata * 80;
 
+//Numero 3
 
         if((litros % 3.6) != 0)
         {
             galao = galao + 1;
         }
-        vGalao =  lata * 25;
+        vGalao =  galao * 25;
 
 //Numero 4
 
-        if(litros > 18)
+        if(litros >= 18)
         {
            mrLata = (int) litros / 18;
 
@@ -107,8 +118,23 @@ public class MainActivity extends AppCompatActivity {
                     mrGalao = mrGalao + 1;
                 }
             }
+        }
+        else{
 
+            if (litros < 10.9)
+            {
 
+                mrGalao = (int) (litros / 3.6);
+                resto = (int) (litros % 3.6);
+
+                if(resto != 0)
+                {
+                    mrGalao = mrGalao + 1;
+                }
+            }
+            else{
+                mrLata = mrLata + 1;
+            }
         }
 
         mvLata = mrLata * 80;
